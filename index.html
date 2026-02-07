@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day ❤️</title>
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ff4e8a,#ff8fcf);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.card{
+  background: rgba(255,255,255,0.15);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  color:white;
+  max-width:500px;
+  animation: fade 2s;
+}
+
+h1{font-size:2.5em;}
+p{font-size:1.2em;line-height:1.6;}
+
+button{
+  background:white;
+  color:#ff4e8a;
+  border:none;
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:1em;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+.hidden{display:none;font-size:1.3em;margin-top:20px;}
+
+@keyframes fade{
+  from{opacity:0;transform:scale(0.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.rose{
+  position:absolute;
+  font-size:22px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall{
+  from{transform:translateY(-100px);}
+  to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🌹 Happy Rose Day My Love 🌹</h1>
+
+  <p>
+    You are the most beautiful part of my life.  
+    Every smile of yours makes my world brighter.  
+    I’m so lucky to have you ❤️
+  </p>
+
+  <button onclick="show()">Click for Surprise 💖</button>
+
+  <div id="msg" class="hidden">
+     Love You Kelavaaa 😘❤️  
+    <br> 
+  </div>
+</div>
+
+<script>
+function show(){
+  document.getElementById("msg").style.display="block";
+}
+
+for(let i=0;i<25;i++){
+  let rose=document.createElement("div");
+  rose.innerHTML="🌹";
+  rose.className="rose";
+  rose.style.left=Math.random()*100+"%";
+  rose.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(rose);
+}
+</script>
+
+</body>
+</html>
+
 
