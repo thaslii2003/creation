@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Propose Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#4a0000,#9e1b32,#ff4d6d);
+  color:#ffe6ea;
+  overflow:hidden;
+}
+
+/* floating hearts background */
+.hearts span{
+  position:fixed;
+  bottom:-20px;
+  color:rgba(255,120,140,.25);
+  font-size:18px;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0) scale(.8);opacity:0;}
+  10%{opacity:1;}
+  100%{transform:translateY(-120vh) scale(1.4);opacity:0;}
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:32px 26px;
+  max-width:380px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 18px 45px rgba(0,0,0,.6);
+  animation:fade .9s ease;
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;
+  margin-bottom:6px;
+  color:#ffd6dd;
+}
+
+h2{
+  font-weight:300;
+  margin-bottom:18px;
+  color:#ffc1cd;
+  font-size:1rem;
+  letter-spacing:1px;
+}
+
+.line{
+  width:60px;
+  height:2px;
+  background:linear-gradient(to right,transparent,#ff9bb1,transparent);
+  margin:0 auto 18px;
+}
+
+.journey{
+  font-size:.9rem;
+  color:#ffd1da;
+  margin-bottom:14px;
+}
+
+p{
+  font-size:1.02rem;
+  line-height:1.6;
+  margin:10px 0;
+  color:#fff0f3;
+}
+
+.heart{
+  font-size:3rem;
+  margin:18px 0 14px;
+  animation:beat 1.3s infinite;
+  cursor:pointer;
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+}
+
+button{
+  padding:12px 30px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.05);
+  color:white;
+  font-size:.95rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  background:rgba(255,255,255,.15);
+  transform:translateY(-2px);
+}
+
+.proposal{
+  margin-top:18px;
+  font-size:1.18rem;
+  color:#ffd6df;
+  display:none;
+  animation:fade .6s ease;
+}
+
+.btn-row{
+  margin-top:14px;
+  height:55px;
+  position:relative;
+}
+
+#yesBtn{
+  background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+  border:none;
+  box-shadow:0 6px 18px rgba(255,80,120,.5);
+}
+
+#noBtn{
+  position:absolute;
+  right:0;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* yes click hearts */
+.love{
+  position:fixed;
+  font-size:22px;
+  color:#ff4d6d;
+  animation:pop 2s linear forwards;
+}
+
+@keyframes pop{
+  0%{transform:scale(0) translateY(0);opacity:1}
+  100%{transform:scale(1.6) translateY(-130px);opacity:0}
+}
+
+/* fade + scale for yes click message */
+@keyframes fadeScale {
+  from { opacity:0; transform:scale(0.8);}
+  to   { opacity:1; transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card" id="card">
+
+<h1>Happy Propose Day</h1>
+<h2>just for you ❤️</h2>
+<div class="line"></div>
+
+<div class="journey">From classmates → friends → love ❤️</div>
+
+<p>
+  We started in the same classroom,<br>
+  and slowly became each other’s favorite place.
+</p>
+
+<p>
+  With you, every moment feels calm, safe, and beautiful.
+</p>
+
+<div class="heart" onclick="showProposal()">❤️</div>
+<button onclick="showProposal()">one simple question</button>
+
+<div class="proposal" id="proposal">
+  Will you stay with me, always? 💍
+
+  <div class="btn-row">
+    <button id="yesBtn">YES ❤️</button>
+    <button id="noBtn">NO 😜</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showProposal(){
+  document.getElementById("proposal").style.display="block";
+}
+
+// NO button moves
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+function moveNo(){
+  const x=Math.random()*160-80;
+  const y=Math.random()*70-35;
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
+}
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+
+// YES button click effect
+yesBtn.addEventListener("click",()=>{
+  const card = document.getElementById("card");
+  card.innerHTML=`
+    <h1 style="animation:fadeScale 0.8s ease; color:#ffb3c6;">Yaaay! I knew it 😘❤️</h1>
+</div>
+
+  `;
+  heartBurst();
+});
+
+// heart burst animation
+function heartBurst(){
+  for(let i=0;i<22;i++){
+    const h=document.createElement("div");
+    h.className="love";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="75vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+// floating hearts background
+const hearts=document.getElementById("hearts");
+for(let i=0;i<18;i++){
+  const s=document.createElement("span");
+  s.innerHTML="❤";
+  s.style.left=Math.random()*100+"vw";
+  s.style.fontSize=(Math.random()*12+12)+"px";
+  s.style.animationDuration=(Math.random()*6+8)+"s";
+  s.style.animationDelay=Math.random()*5+"s";
+  hearts.appendChild(s);
+}
+</script>
+
+</body>
+</html>
