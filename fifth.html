@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hold My Hand 🤍 | Promise Day</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 1s ease, transform 1s ease;
+      text-align: center;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    /* First screen */
+    .hold-area {
+      background: rgba(255,255,255,0.15);
+      border: 2px dashed rgba(255,255,255,0.7);
+      border-radius: 25px;
+      padding: 35px 30px;
+      max-width: 360px;
+      width: 85%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    .hold-area h1 { font-size: 2em; margin-bottom: 10px; }
+    .hold-area p { font-size: 1.05em; line-height: 1.6; margin-bottom: 18px; }
+
+    .hold-btn {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4d6d, #ff1e56);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      user-select: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .hold-btn:active { transform: scale(0.95); }
+
+    .progress {
+      margin-top: 15px;
+      height: 8px;
+      width: 100%;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0;
+      background: #fff;
+      border-radius: 10px;
+      transition: width 0.1s linear;
+    }
+
+    /* Promise screen */
+    .container {
+      background: rgba(255, 255, 255, 0.18);
+      padding: 35px 30px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      max-width: 420px;
+      width: 90%;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 { font-size: 2em; margin-bottom: 8px; }
+    h2 { font-size: 1.3em; margin-bottom: 15px; font-weight: normal; }
+
+    .message {
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .promise {
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin: 12px 0;
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      from {opacity:0; transform:scale(0.7);}
+      to {opacity:1; transform:scale(1);}
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.85);
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      from {transform: translateY(110vh) scale(0.7);}
+      to {transform: translateY(-10vh) scale(1.5);}
+    }
+
+    audio { display: none; }
+
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Screen 1 -->
+  <div class="screen" id="screen1">
+    <div class="hold-area">
+      <h1>Happy Promise Day ❤️</h1>
+      <p>Touch & hold the heart for 3 seconds…</p>
+
+      <div class="hold-btn" id="holdBtn">❤️</div>
+
+      <div class="progress">
+        <div class="bar" id="bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="screen hidden" id="screen2">
+    <div class="container">
+
+      <div class="message">
+        In the beginning, I was scared of promises.  
+        Because I was afraid I might not be strong enough to keep them.  
+        I never wanted to say something and become the reason for your sadness.  
+        <br><br>
+        Somewhere in that journey, my fear slowly turned into certainty. 🤍  
+        <br><br>
+I promise that no matter how hard life becomes and no matter what challenges we face, I will stay with you and choose you every single time. 
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let holdTime = 0;
+    let timer;
+    const holdBtn = document.getElementById('holdBtn');
+    const bar = document.getElementById('bar');
+
+    function startHold() {
+      holdTime = 0;
+      bar.style.width = '0%';
+      timer = setInterval(() => {
+        holdTime += 100;
+        bar.style.width = (holdTime / 3000) * 100 + '%';
+        if (holdTime >= 3000) {
+          clearInterval(timer);
+          document.getElementById('screen1').classList.add('hidden');
+          document.getElementById('screen2').classList.remove('hidden');
+        }
+      }, 100);
+    }
+
+    function stopHold() {
+      clearInterval(timer);
+      bar.style.width = '0%';
+    }
+
+    holdBtn.addEventListener('mousedown', startHold);
+    holdBtn.addEventListener('touchstart', startHold);
+    holdBtn.addEventListener('mouseup', stopHold);
+    holdBtn.addEventListener('mouseleave', stopHold);
+    holdBtn.addEventListener('touchend', stopHold);
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (16 + Math.random() * 22) + 'px';
+      heart.style.animationDuration = (3 + Math.random() * 4) + 's';
+      document.getElementById('hearts').appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
