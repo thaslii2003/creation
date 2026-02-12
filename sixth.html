@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catch My Hug 🤍 · rose & velvet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* ---------- 🥀 only modified: cards, tap‑time animations, bg, font style / size / color ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* font change: softer, romantic serif for headings, clean sans for text */
+            font-family: 'Quicksand', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* 🌸 BACKGROUND – totally changed : warm rose gradient + velvet depth + slow drift */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 30% 30%, #3e1929, #2b1c2c, #1e151f);
+            background-size: 200% 200%;
+            animation: bgBloom 14s ease infinite alternate;
+        }
+
+        @keyframes bgBloom {
+            0% { background-position: 0% 20%; }
+            50% { background-position: 100% 80%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ----- screens remain same structure, only transition smooth ----- */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s ease;
+            padding: 20px;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.96);
+        }
+
+        /* 🩵✨ CARD – completely redesigned: romantic, deeper glass, custom fonts, bigger softer text */
+        .card {
+            background: rgba(30, 18, 28, 0.55);        /* deep mauve base */
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            padding: 48px 40px;
+            border-radius: 48px 24px 48px 24px;        /* asymmetric softness */
+            width: 90%;
+            max-width: 750px;
+            color: #fff8f2;
+            box-shadow: 0 30px 60px -10px rgba(10, 5, 10, 0.6), 0 0 0 1px rgba(255, 220, 240, 0.08) inset, 0 0 20px rgba(255, 160, 210, 0.2);
+            border: 1px solid rgba(255, 230, 240, 0.15);
+            transition: 0.35s ease-out;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 45px 70px -8px rgba(120, 40, 70, 0.5), 0 0 0 1.5px rgba(255, 200, 230, 0.2) inset;
+            background: rgba(40, 22, 32, 0.65);
+            border-color: rgba(255, 190, 220, 0.3);
+        }
+
+        /* ✨ TAP / CLICK animation — completely new: burst of warm light & heart beat on tap (time animation) */
+        .card:active {
+            transform: scale(0.99);
+            background: rgba(88, 44, 64, 0.75);
+            box-shadow: 0 0 35px #ff99bb, 0 0 60px rgba(255, 128, 128, 0.7);
+            transition: all 0.08s;
+            border-color: #ffccdd;
+        }
+
+        /* 🍂 headings – vintage romance, serif, warm blush */
+        h1 {
+            font-size: 42px;            /* enlarged, expressive */
+            font-weight: 600;
+            font-family: 'Playfair Display', 'Cormorant Garamond', 'Georgia', serif;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            color: #ffe7f0;             /* soft petal */
+            text-shadow: 2px 2px 6px #33001a, 0 0 18px #ffaacc;
+        }
+
+        h2 {
+            font-size: 30px;            /* increased, elegant */
+            font-weight: 500;
+            font-family: 'Playfair Display', 'Cormorant Garamond', 'Georgia', serif;
+            margin-bottom: 24px;
+            color: #ffdee9;
+            text-shadow: 1px 1px 8px #551a3a;
+            letter-spacing: 1.5px;
+        }
+
+        /* 📜 paragraph – bigger, airy, warm white, gentle leading */
+        p {
+            font-size: 18px;            /* more readable, cozy */
+            line-height: 1.9;
+            font-weight: 400;
+            color: #fbeef4;             /* milky rose */
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            margin-bottom: 12px;
+        }
+
+        .card p:last-of-type {
+            margin-bottom: 4px;
+        }
+
+        /* moving heart – stays playful but refined */
+        #movingHeart {
+            font-size: 70px;
+            position: absolute;
+            cursor: pointer;
+            transition: 0.25s ease;
+            filter: drop-shadow(0 0 18px rgba(255, 130, 180, 0.9));
+            text-shadow: 0 0 20px #ff99bb;
+        }
+
+        #movingHeart:hover {
+            transform: scale(1.3) rotate(6deg);
+        }
+
+        /* 🫂 hug emoji – even softer pulse, romantic shimmer */
+        .hug {
+            font-size: 68px;            /* bigger, generous */
+            margin-top: 20px;
+            cursor: pointer;
+            animation: softPulse 2.2s infinite ease-in-out;
+            transition: 0.25s;
+            filter: drop-shadow(0 0 14px #ffa7b6);
+        }
+
+        .hug:hover {
+            transform: scale(1.25);
+            filter: drop-shadow(0 0 26px #ffc0cb);
+        }
+
+        @keyframes softPulse {
+            0% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.18); opacity: 1; text-shadow: 0 0 30px #ffc0cb; }
+            100% { transform: scale(1); opacity: 0.95; }
+        }
+
+        /* 💞 floating hearts – more delicate, plum shades */
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            animation: floatUp 4.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+            pointer-events: none;
+            filter: drop-shadow(0 0 12px rgba(255, 140, 180, 0.9));
+            color: #ffc2d1;            /* soft pink */
+            text-shadow: 0 0 10px #ff80a5;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.8) rotate(0deg);
+            }
+            70% {
+                opacity: 0.9;
+                transform: translateY(-200px) scale(1.3) rotate(10deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-300px) scale(1.7) rotate(20deg);
+            }
+        }
+
+        /* 💎 extra – first screen text tuned for harmony */
+        #s1 h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+            color: #ffecf0;
+        }
+
+        #s1 p {
+            font-size: 20px;
+            color: #ffe2ec;
+            font-weight: 400;
+        }
+
+        /* responsive: all fonts scale gracefully */
+        @media(max-width:480px){
+            h1{font-size: 34px;}
+            h2{font-size: 26px;}
+            p{font-size: 16.5px;}
+            .card{padding: 38px 26px; border-radius: 36px 18px 36px 18px;}
+            .hug{font-size: 60px;}
+            #movingHeart{font-size: 60px;}
+        }
+
+        /* import softer font – quicker than link */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Quicksand:wght@400;600&display=swap');
+    </style>
+</head>
+<body>
+
+<!-- SCREEN 1 : catch the moving love -->
+<div class="screen" id="s1">
+    <h1 style="color:white; text-shadow: 0 0 16px #ffa5a5;">Catch Moving Love 😌</h1>
+    <p style="color:white;">You always catch my moods… now catch this 🤭❤️</p>
+    <div id="movingHeart">❤️</div>
+</div>
+
+<!-- SCREEN 2 : hug card – totally restyled with new fonts, colors, and tap animation -->
+<div class="screen hidden" id="s2">
+    <div class="card">
+        <h2>Are you tired of catching it? 😁</h2>
+        <p>
+            Just like when I fight with you😂<br><br>
+            I go silent, create distance,
+            and act like my love has gone somewhere far 😐<br>
+            But you never let it go too far.
+            With your patience, you slowly come closer,
+            trying to make me speak again 😊<br><br>
+            Just like this moving heart… when it tries to run away,
+            you catch it gently 🥰
+        </p>
+        <p style="margin-top:10px;">
+            And for the times I made it difficult… I’m sorry 😐<br><br>
+            Here’s a big hug for you, tap to catch it 🤗
+        </p>
+        <div class="hug" id="hugEmoji">🫂</div>
+    </div>
+</div>
+
+<!-- SCREEN 3 : final hug day message – card redesigned, larger romantic text, soft tap response -->
+<div class="screen hidden" id="s3">
+    <div class="card">
+        <h1>Happy Hug Day 🫂🤍</h1>
+        <p>
+            I don’t think I truly understand the meaning of a hug until it's yours.
+            When you hold me, everything feels calm.
+            I wish I could stay there longer, in that silent comfort,
+            without time, without reality pulling us apart 🙂<br>
+            And right now, I miss you more than I can explain. 🫂🥺
+        </p>
+    </div>
+</div>
+
+<script>
+    // ---------- functionality untouched — same warm interactions, only CSS mods (as requested) ----------
+    const heart = document.getElementById("movingHeart");
+
+    function moveHeart(){
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+        heart.style.left = x + "px";
+        heart.style.top = y + "px";
+    }
+
+    const heartInterval = setInterval(moveHeart,800);
+
+    // When heart is caught → screen 2
+    heart.addEventListener("click",()=>{
+        clearInterval(heartInterval);
+        for(let i=0;i<20;i++){
+            const h=document.createElement("div");
+            h.className="heart";
+            h.innerHTML="❤️";
+            h.style.left=heart.style.left;
+            h.style.top=heart.style.top;
+            document.body.appendChild(h);
+            setTimeout(()=>h.remove(),4000);
+        }
+        document.getElementById("s1").classList.add("hidden");
+        document.getElementById("s2").classList.remove("hidden");
+    });
+
+    // Hug emoji click → screen 3 + hearts burst
+    const hugEmoji = document.getElementById("hugEmoji");
+    hugEmoji.addEventListener("click",()=>{
+        for(let i=0;i<25;i++){
+            const h=document.createElement("div");
+            h.className="heart";
+            h.innerHTML="❤️";
+            h.style.left=(window.innerWidth/2 + Math.random()*100 - 50)+"px";
+            h.style.top=(window.innerHeight/2 + Math.random()*100 - 50)+"px";
+            h.style.fontSize=(15+Math.random()*20)+"px";
+            document.body.appendChild(h);
+            setTimeout(()=>h.remove(),4000);
+        }
+        document.getElementById("s2").classList.add("hidden");
+        document.getElementById("s3").classList.remove("hidden");
+    });
+</script>
+
+<!-- 🌹✨ only card, bg, tap animation, font size/color/style modified — everything else untouched ✨🌹 -->
+</body>
+</html>
