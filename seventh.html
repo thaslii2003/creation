@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+    background:black;
+    color:white;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
+.screen{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+.active{display:flex;}
+h1,p{
+    margin:12px 0;
+    font-size:22px;
+    animation:fade 1.5s;
+}
+.big{font-size:30px;}
+.zoom{animation:zoom 4s forwards;}
+.glow{animation:glow 2s infinite;}
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.4);}
+}
+@keyframes glow{
+    0%,100%{text-shadow:0 0 5px #ff2f6d;}
+    50%{text-shadow:0 0 25px #ff2f6d;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="s1" class="screen active"></div>
+
+<div id="s2" class="screen">
+<h1>Why are you waiting here?</h1>
+</div>
+
+<div id="s3" class="screen">
+<h1>Are you thinking about me?</h1>
+</div>
+
+<div id="s4" class="screen">
+<h1>Or waiting for something sweet...</h1>
+</div>
+
+<div id="s5" class="screen">
+<h1>just from me? ❤️</h1>
+</div>
+
+<div id="s6" class="screen">
+<h1>Ohhh...</h1>
+<p>Are you waiting for a kiss? 😌</p>
+</div>
+
+<div id="s7" class="screen">
+<h1>Okay...</h1>
+<p>Wait a little...</p>
+<!-- <p>I want to remind you of something first ❤️</p> -->
+</div>
+
+
+
+<div id="s8" class="screen">
+<p>Do you remember...</p>
+<h1>Our first kiss?</h1>
+</div>
+
+<div id="s9" class="screen">
+<p>We never planned it...</p>
+<p>We never even thought about it...</p>
+</div>
+
+<div id="s10" class="screen">
+<p>But when it happened...</p>
+<p>It felt like my soul stepped out for a second…</p>
+<h1>Still now... that one kiss feels special ❤️</h1>
+</div>
+
+<div id="s11" class="screen">
+<p>Now whenever we meet...</p>
+<p>you can’t go back without giving me a kiss.</p>
+<p>Your kisses always make me feel something...</p>
+<h1>something that never fades ❤️</h1>
+</div>
+
+<div id="s12" class="screen">
+<p>Now close your eyes...</p>
+<p>And imagine I'm right in front of you...</p>
+</div>
+
+<div id="s13" class="screen">
+<h1 class="zoom">I’m coming closer...</h1>
+</div>
+
+<div id="s14" class="screen">
+<p>Very close...</p>
+<p>So close that you can feel my breath...</p>
+<p>And my breath on your lips...</p>
+</div>
+
+<div id="s15" class="screen">
+<h1 class="big glow">This kiss is for you 💋</h1>
+</div>
+
+<div id="s16" class="screen">
+<h1>Happy Kiss Day My Love ❤️</h1>
+<p>I miss you more than you know 💕</p>
+</div>
+
+<script>
+let current=1;
+function next(n){
+    document.getElementById("s"+current).classList.remove("active");
+    document.getElementById("s"+n).classList.add("active");
+    current=n;
+}
+
+setTimeout(()=>next(2),4000);
+setTimeout(()=>next(3),8000);
+setTimeout(()=>next(4),12000);
+setTimeout(()=>next(5),16000);
+setTimeout(()=>next(6),20000);
+setTimeout(()=>next(7),26000);
+setTimeout(()=>next(8),32000);
+setTimeout(()=>next(9),37000);
+setTimeout(()=>next(10),43000);
+setTimeout(()=>next(11),49000);
+setTimeout(()=>next(12),55000);
+setTimeout(()=>next(13),60000);
+setTimeout(()=>next(14),66000);
+setTimeout(()=>next(15),71000);
+setTimeout(()=>next(16),77000);
+</script>
+
+</body>
+</html>
