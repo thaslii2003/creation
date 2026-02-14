@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sealed With Love 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:'Georgia',serif;
+    background: linear-gradient(to bottom,#42011a,#dd0000);
+    color:white;
+    overflow:hidden;
+}
+
+/* Common Screen */
+.screen{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    transition:1s;
+}
+.hidden{display:none;}
+
+/* Input */
+input{
+    padding:12px 20px;
+    border-radius:25px;
+    border:none;
+    font-size:1em;
+    margin-top:15px;
+}
+
+/* Envelope */
+/* Envelope */
+.envelope{
+    width:250px;
+    height:160px;
+    background:#ff99cc;
+    position:relative;
+    cursor:pointer;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    transition:0.5s;
+}
+.envelope:hover{transform:scale(1.05);}
+.envelope:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#ff66a3;
+    clip-path:polygon(0 0,50% 60%,100% 0);
+}
+
+/* Letter */
+.letter{
+    background:white;
+    color:#cc0066;
+    padding:40px;
+    border-radius:20px;
+    max-width:600px;
+    line-height:1.8;
+    box-shadow:0 15px 40px rgba(0,0,0,0.6);
+    animation:fade 1.5s ease forwards;
+}
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* Button */
+button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(to right,#ff4da6,#ff99cc);
+    color:white;
+    font-size:1em;
+    cursor:pointer;
+}
+
+/* Gift */
+.gift{
+    width:200px;
+    height:200px;
+    background:#ff4da6;
+    position:relative;
+    border-radius:15px;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+.lid{
+    width:200px;
+    height:60px;
+    background:#ff99cc;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius:15px 15px 0 0;
+    transition:1s;
+}
+.open .lid{
+    transform:translateY(-100px) rotate(-15deg);
+}
+.ribbon{
+    width:20px;
+    height:200px;
+    background:white;
+    position:absolute;
+    left:90px;
+}
+.surprise{
+    margin-top:30px;
+    font-size:1.5em;
+    color:#000000;
+    display:none;
+}
+.error{
+    margin-top:10px;
+    color:#000000;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUTHENTICATION SCREEN -->
+<div class="screen" id="authScreen">
+    <h1>💖 Secret Question 💖</h1>
+    <p>What do I call you?</p>
+    <input type="text" id="nickname" placeholder="Type your answer...">
+    <button onclick="checkAnswer()">Unlock 💌</button>
+    <div class="error" id="errorMsg"></div>
+</div>
+
+<!-- ENVELOPE SCREEN -->
+<div class="screen hidden" id="screen1">
+    <h1>💌 A Letter For You 💌</h1>
+    <p>Click to open your envelope...</p>
+    <div class="envelope" onclick="openLetter()"></div>
+</div>
+
+<!-- LETTER SCREEN -->
+<div class="screen hidden" id="screen2">
+    <div class="letter">
+        <h2>Happy Valentines Day ❤️</h2>
+        <p>
+From the day we became friends, I never knew that you would slowly become the most important part of my life.  
+What started as simple conversations turned into something I can’t imagine living without.  
+
+Your presence feels like peace, like home, like something my heart was always searching for. 💕  
+
+Thank you for being patient with me.  
+Thank you for choosing me even when I’m not perfect.  
+Thank you for loving me in a way that feels steady, secure, and true. 🥰  
+
+Waking up knowing you are mine is already the greatest blessing I could ever ask for. 🎁❤️  
+
+If I had to choose again, in every lifetime,  
+I would still choose you.  
+
+
+        </p>
+
+        <button onclick="nextScreen()">Open Your Gift 🎁</button>
+    </div>
+</div>
+
+<!-- GIFT SCREEN -->
+<div class="screen hidden" id="screen3">
+    <h1>🎁 Your Valentine Gift 🎁</h1>
+    <div class="gift" id="giftBox" onclick="openGift()">
+        <div class="lid"></div>
+        <div class="ribbon"></div>
+    </div>
+    <div class="surprise" id="surpriseText">
+        Surprise… <br>It’s ME.  
+        Your forever Valentine. 💖  <br><br>
+        Now come to WhatsApp 😉
+    </div>
+</div>
+
+<script>
+
+/* Authentication */
+function checkAnswer(){
+    let value = document.getElementById("nickname").value.trim().toLowerCase();
+    if(value === "kelava"){
+        document.getElementById("authScreen").classList.add("hidden");
+        document.getElementById("screen1").classList.remove("hidden");
+    } else {
+        document.getElementById("errorMsg").innerText = "Hmm… that’s not the name I use for you 🥺 Try again.";
+    }
+}
+
+/* Open Envelope */
+function openLetter(){
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+}
+
+/* Next */
+function nextScreen(){
+    document.getElementById("screen2").classList.add("hidden");
+    document.getElementById("screen3").classList.remove("hidden");
+}
+
+/* Open Gift */
+function openGift(){
+    document.getElementById("giftBox").classList.add("open");
+    document.getElementById("surpriseText").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
